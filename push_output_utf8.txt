@@ -1,0 +1,11 @@
+﻿git : Host key verification failed.
+At line:1 char:1
++ git push -u origin main > push_output.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Host key verification failed.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.

@@ -1,31 +1,32 @@
 import { NextResponse } from 'next/server';
-import type { NewsItem } from '@/types';
 
-// Bu fonksiyon gerçek bir API'den haber çekecek
-// Şimdilik mock data döndürüyoruz
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
-    const topic = searchParams.get('topic');
+    const query = searchParams.get('q') || 'Türkiye gündemi';
+
+    const apiKey = process.env.YOU_COM_API_KEY;
+
+    if (!apiKey) {
+        // Fallback for development if key is missing, or return error
+        console.warn('YOU_COM_API_KEY is missing');
+        return NextResponse.json({ error: 'API key not configured' }, { status: 500 });
+    }
 
     try {
-        // Gerçek implementasyonda buraya NewsAPI, Google News API vb. entegre edilecek
-        // Örnek: const response = await fetch(`https://newsapi.org/v2/everything?q=${topic}&language=tr&apiKey=${process.env.NEWS_API_KEY}`);
+        const response = await fetch(`https://api.ydc-index.io/livenews?q=${encodeURIComponent(query)}`, {
+            headers: {
+                'X-API-Key': apiKey,
+            },
+        });
 
-        const mockNews: NewsItem[] = [
-            {
-                title: `${topic} ile ilgili son gelişmeler`,
-                source: "Örnek Haber Kaynağı",
-                date: new Date().toISOString(),
-                url: "#",
-                summary: "Bu konuda güncel haberler burada görünecek. API entegrasyonu yapıldığında gerçek haberler çekilecek."
-            }
-        ];
+        if (!response.ok) {
+            throw new Error(`Failed to fetch news: ${response.statusText}`);
+        }
 
-        return NextResponse.json({ news: mockNews, success: true });
+        const data = await response.json();
+        return NextResponse.json(data);
     } catch (error) {
-        return NextResponse.json(
-            { error: 'Haberler yüklenirken bir hata oluştu', success: false },
-            { status: 500 }
-        );
+        console.error('News fetch error:', error);
+        return NextResponse.json({ error: 'Failed to fetch news' }, { status: 500 });
     }
 }

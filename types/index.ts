@@ -55,3 +55,14 @@ export const categoryColors = {
     security: '#F59E0B',
     digital: '#06B6D4',
 } as const;
+
+export interface NewsItem {
+    title: string;
+    description: string;
+    url: string;
+    thumbnail?: {
+        src: string;
+    };
+    source_name: string;
+    age: string;
+}

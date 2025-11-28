@@ -1,0 +1,9 @@
+﻿branch 'main' set up to track 'origin/main'.
+git : To https://github.com/saitamar10/onle-nextt.git
+At line:1 char:73
++ ... /onle-nextt.git; git push -u origin main > push_https_output.txt 2>&1
++                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (To https://gith.../onle-nextt.git:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ * [new branch]      main -> main
