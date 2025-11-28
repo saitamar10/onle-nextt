@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    /* ☀️ Light Mode (Varsayılan) */
+    body {
+        @apply bg-bg-primary text-text-primary font-body;
+    }
+
+    /* 🌙 Dark Mode */
+    @media (prefers-color-scheme: dark) {
+        body {
+            @apply bg-[#0F1113] text-[#F3F4F6];
+        }
+    }
+}
+
+@layer utilities {
+    .gradient-text {
+        @apply bg-gradient-to-r from-env via-health to-society bg-clip-text text-transparent;
+    }
+
+    .card-hover {
+        @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl;
+    }
+}
+
+/* Custom Scrollbar - Light Mode */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F8FAF7;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #22C55E;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #16A34A;
+}
+
+/* Custom Scrollbar - Dark Mode */
+@media (prefers-color-scheme: dark) {
+    ::-webkit-scrollbar-track {
+        background: #0F1113;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #22C55E;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #4ADE80;
+    }
+}
+
+/* Mobile Safe Area Support */
+.safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Selection */
+::selection {
+    background: #22C55E;
+    color: white;
+}
